@@ -156,17 +156,17 @@ class Engine
 public:
         void update(chrono::milliseconds deltaTime)
         {
-            if (position.x < 40.f){
+            if (position.x <= 40.f){
                 float a_distance  = deltaTime.count()/2000.f * 40.f;
                 position.x += a_distance;
             }else if (position.x >= 40.f && position.y < 10.f){
                 float b_distance = deltaTime.count()/3000.f * 10.f;
-                position.y = b_distance;
+                position.y += b_distance;
             }else if (position.x >= 40.f && position.y >= 10.f && position.x > 0.f){
-                float c_distance_x = deltaTime.count()/400.f * 40.f;
-                float c_distance_y = deltaTime.count()/100.f * 10.f;
-                position.x = c_distance_x;
-                position.y = c_distance_y;
+                float c_distance_x = deltaTime.count()/1000.f * 40.f;
+                //float c_distance_y = deltaTime.count()/100.f * 10.f;
+                position.x.y  -= c_distance_x;
+                position.y -= c_distance_y;
             }else{
                 position.x = 0.f;
                 position.y = 0.f;
