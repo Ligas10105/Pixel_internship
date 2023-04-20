@@ -138,7 +138,8 @@ using Pixel = char;
 class Engine {
 public:
 
-    int repeat {};
+    int repeat{};
+
     void update(chrono::milliseconds deltaTime) {
         if (position.x < 40.f && position.y == 0.f) {
             float a_distance = deltaTime.count() / 2000.f * 40.f;
@@ -151,8 +152,7 @@ public:
             float c_distance_y = deltaTime.count() / 1000.0f * 10.0f / sqrt(2);
             position.x -= c_distance_x;
             position.y -= c_distance_y;
-        }
-        else {
+        } else {
             repeat++;
             position.x = 0.f;
             position.y = 0.f;
@@ -176,20 +176,20 @@ int main() {
     Screen screen;
 
 
-        auto startTime = chrono::high_resolution_clock::now();
-        while (engine.repeat <= 5) {
+    auto startTime = chrono::high_resolution_clock::now();
+    while (engine.repeat <= 4) {
 
-            auto now = chrono::high_resolution_clock::now();
-            auto deltaTime = chrono::duration_cast<chrono::milliseconds>(now - startTime);
-            if (deltaTime >= 20ms) {
-                screen.clear();
-                engine.update(deltaTime);
-                engine.render(screen);
-                screen.flush();
-                startTime = now;
+        auto now = chrono::high_resolution_clock::now();
+        auto deltaTime = chrono::duration_cast<chrono::milliseconds>(now - startTime);
+        if (deltaTime >= 20ms) {
+            screen.clear();
+            engine.update(deltaTime);
+            engine.render(screen);
+            screen.flush();
+            startTime = now;
 
-            }
         }
+    }
 
 
     return 0;
